@@ -1,4 +1,5 @@
-﻿using ControleDeMedicamentos.Dominio.ModuloFornecedor;
+﻿using ControleDeMedicamentos.Dominio.ModucloPaciente;
+using ControleDeMedicamentos.Dominio.ModuloFornecedor;
 using ControleDeMedicamentos.Dominio.ModuloFuncionario;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -9,6 +10,7 @@ public class ContextoDados
 {
     public List<Funcionario> Funcionarios { get; set; } = new List<Funcionario>();
     public List<Fornecedor> Fornecedores { get; set; } = new List<Fornecedor>();
+    public List<Paciente> Pacientes { get; set; } = new List<Paciente>();
 
     private string pastaArmazenamento = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
@@ -58,5 +60,7 @@ public class ContextoDados
         if (contextoArmazenado == null) return;
 
         Funcionarios = contextoArmazenado.Funcionarios;
+        Fornecedores = contextoArmazenado.Fornecedores;
+        Pacientes = contextoArmazenado.Pacientes;
     }
 }

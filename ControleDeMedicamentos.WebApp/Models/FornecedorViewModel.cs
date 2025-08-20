@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ControleDeMedicamentos.WebApp.Models;
 
-    public class CadastrarFornecedoresViewModel
+    public class CadastrarFornecedorViewModel
     {
     [Required(ErrorMessage = "O campo 'Nome' é obrigatório.")]
     [StringLength(100, MinimumLength = 2, ErrorMessage = "O campo 'Nome' deve conter entre 2 e 100 caracteres.")]
@@ -16,16 +16,16 @@ namespace ControleDeMedicamentos.WebApp.Models;
     )]
     public string Telefone { get; set; }
 
-    [Required(ErrorMessage = "O campo 'Cnpj' é obrigatório.")]
+    [Required(ErrorMessage = "O campo 'CNPJ' é obrigatório.")]
     [RegularExpression(
-        @"/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/",
-        ErrorMessage = "O campo 'Cnpj' deve seguir um formato válido."
+        @"^\d{2}\.?\d{3}\.?\d{3}/?\d{4}-?\d{2}$",
+        ErrorMessage = "O campo 'CNPJ' deve seguir um formato válido."
     )]
     public string Cnpj { get; set; }
 
-    public CadastrarFornecedoresViewModel() { }
+    public CadastrarFornecedorViewModel() { }
 
-    public CadastrarFornecedoresViewModel(string nome, string telefone, string cnpj) : this()
+    public CadastrarFornecedorViewModel(string nome, string telefone, string cnpj) : this()
     {
         Nome = nome;
         Telefone = telefone;
@@ -48,21 +48,21 @@ public class EditarFornecedorViewModel
     )]
     public string Telefone { get; set; }
 
-    [Required(ErrorMessage = "O campo 'Cnpj' é obrigatório.")]
+    [Required(ErrorMessage = "O campo 'CNPJ' é obrigatório.")]
     [RegularExpression(
-        @"/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/",
-        ErrorMessage = "O campo 'Cnpj' deve seguir um formato válido."
+        @"^\d{2}\.?\d{3}\.?\d{3}/?\d{4}-?\d{2}$",
+        ErrorMessage = "O campo 'CNPJ' deve seguir um formato válido."
     )]
     public string Cnpj { get; set; }
 
     public EditarFornecedorViewModel() { }
 
-    public EditarFornecedorViewModel(Guid id, string nome, string telefone, string Cnpj) : this()
+    public EditarFornecedorViewModel(Guid id, string nome, string telefone, string cnpj) : this()
     {
         Id = id;
         Nome = nome;
         Telefone = telefone;
-        Cnpj = Cnpj;
+        Cnpj = cnpj;
     }
 }
 
@@ -80,15 +80,15 @@ public class ExcluirFornecedorViewModel
     }
 }
 
-public class VisualizarFornecedorsViewModel
+public class VisualizarFornecedoresViewModel
 {
     public List<DetalhesFornecedorViewModel> Registros { get; }
 
-    public VisualizarFornecedorsViewModel(List<Fornecedor> Fornecedores)
+    public VisualizarFornecedoresViewModel(List<Fornecedor> fornecedores)
     {
         Registros = [];
 
-        foreach (var f in Fornecedores)
+        foreach (var f in fornecedores)
         {
             var detalhesVM = new DetalhesFornecedorViewModel(
                 f.Id,
@@ -116,6 +116,5 @@ public class DetalhesFornecedorViewModel
         Telefone = telefone;
         Cnpj = cnpj;
     }
-
 }
 

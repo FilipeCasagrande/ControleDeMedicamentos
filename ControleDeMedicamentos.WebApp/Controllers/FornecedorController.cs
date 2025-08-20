@@ -3,6 +3,7 @@ using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloFornecedor;
 using ControleDeMedicamentos.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace ControleDeMedicamentos.WebApp.Controllers;
 
 public class FornecedorController : Controller
@@ -17,9 +18,9 @@ public class FornecedorController : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        var Fornecedores = repositorioFornecedor.SelecionarRegistros();
+        var fornecedores = repositorioFornecedor.SelecionarRegistros();
 
-        var visualizarVm = new VisualizarFornecedorsViewModel(Fornecedores);
+        var visualizarVm = new VisualizarFornecedoresViewModel(fornecedores);
 
         return View(visualizarVm);
     }
@@ -27,13 +28,13 @@ public class FornecedorController : Controller
     [HttpGet]
     public IActionResult Cadastrar()
     {
-        var cadastrarVm = new CadastrarFornecedoresViewModel();
+        var cadastrarVm = new CadastrarFornecedorViewModel();
 
         return View(cadastrarVm);
     }
 
     [HttpPost]
-    public IActionResult Cadastrar(CadastrarFornecedoresViewModel cadastrarVm)
+    public IActionResult Cadastrar(CadastrarFornecedorViewModel cadastrarVm)
     {
         if (!ModelState.IsValid)
             return View(cadastrarVm);
@@ -70,13 +71,13 @@ public class FornecedorController : Controller
         if (!ModelState.IsValid)
             return View(editarVm);
 
-        var FornecedorEditado = new Fornecedor(
+        var fornecedorEditado = new Fornecedor(
             editarVm.Nome,
             editarVm.Telefone,
             editarVm.Cnpj
         );
 
-        repositorioFornecedor.EditarRegistro(editarVm.Id, FornecedorEditado);
+        repositorioFornecedor.EditarRegistro(editarVm.Id, fornecedorEditado);
 
         return RedirectToAction(nameof(Index));
     }

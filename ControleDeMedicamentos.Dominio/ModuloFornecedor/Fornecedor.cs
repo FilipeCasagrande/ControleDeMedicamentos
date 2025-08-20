@@ -46,7 +46,7 @@ namespace ControleDeMedicamentos.Dominio.ModuloFornecedor
             if (string.IsNullOrWhiteSpace(Cnpj))
                 erros += "O campo 'CNPJ' é obrigatório.\n";
 
-            else if (!Regex.IsMatch(Cnpj, @"/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/"))
+            else if (!Regex.IsMatch(Cnpj, @"^\d{2}\.?\d{3}\.?\d{3}/?\d{4}-?\d{2}$"))
                 erros += "O campo CNPJ deve seguir um formato válido";
 
             return erros;
