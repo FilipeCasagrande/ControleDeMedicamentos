@@ -1,6 +1,7 @@
 using ControleDeMedicamentos.Infraestrutura.Arquivos.Compartilhado;
 using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloFornecedor;
 using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloFuncionario;
+using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloMedicamento;
 using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloPaciente;
 
 namespace ControleDeMedicamentos.WebApp;
@@ -13,6 +14,7 @@ public class Program
 
         // Injeção de dependências criadas por nós
         builder.Services.AddScoped(ConfigurarContextoDados);
+        builder.Services.AddScoped<RepositorioMedicamentoEmArquivo>();
         builder.Services.AddScoped<RepositorioFuncionarioEmArquivo>();          
         builder.Services.AddScoped<RepositorioFornecedorEmArquivo>();
         builder.Services.AddScoped<RepositorioPacienteEmArquivo>(); 
