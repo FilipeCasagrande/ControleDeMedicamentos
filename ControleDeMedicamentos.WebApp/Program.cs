@@ -1,6 +1,7 @@
 using ControleDeMedicamentos.Infraestrutura.Arquivos.Compartilhado;
 using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloFornecedor;
 using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloFuncionario;
+using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloPaciente;
 
 namespace ControleDeMedicamentos.WebApp;
 
@@ -12,10 +13,11 @@ public class Program
 
         // Injeção de dependências criadas por nós
         builder.Services.AddScoped(ConfigurarContextoDados);
-        builder.Services.AddScoped<RepositorioFuncionarioEmArquivo>();          // Injeta uma instância do serviço por requisição (ação) HTTP, essa instância acompanha a requisição do cliente
-        builder.Services.AddScoped<RepositorioFornecedorEmArquivo>();     // Injeta uma instância única do serviço globalmente
-        //builder.Services.AddTransient<RepositorioFuncionarioEmArquivo>();     // Injeta uma instância nova do serviço toda vez que houver uma dependência ao longo de uma requisição
-
+        builder.Services.AddScoped<RepositorioFuncionarioEmArquivo>();          
+        builder.Services.AddScoped<RepositorioFornecedorEmArquivo>();
+        builder.Services.AddScoped<RepositorioPacienteEmArquivo>(); 
+        
+        
         // Injeção de dependências da Microsoft.
         builder.Services.AddControllersWithViews();
 

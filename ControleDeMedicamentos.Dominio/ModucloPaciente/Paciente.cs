@@ -16,6 +16,15 @@ namespace ControleDeMedicamentos.Dominio.ModucloPaciente
         public string Cpf { get; set; }
 
         public Paciente() {}
+
+        public Paciente(string nome, string telefone, string cartao, string cpf)
+        {
+            Nome = nome;
+            Telefone = telefone;
+            Cartao = cartao;
+            Cpf = cpf;
+        }
+
         public override void AtualizarRegistro(Paciente registroAtualizado)
         {
             Nome = registroAtualizado.Nome;

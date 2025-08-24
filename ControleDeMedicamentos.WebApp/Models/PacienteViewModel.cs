@@ -117,7 +117,6 @@ public class VisualizarPacientesViewModel
         }
     }
 }
-
 public class DetalhesPacienteViewModel
 {
     public Guid Id { get; set; }
