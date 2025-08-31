@@ -47,9 +47,7 @@ public abstract class RepositorioBaseEmArquivo<Tipo> where Tipo : EntidadeBase<T
             else if (registros[i].Id == idSelecionado)
             {
                 registros.Remove(registros[i]);
-
                 contextoDados.Salvar();
-
                 return true;
             }
         }

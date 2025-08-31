@@ -13,13 +13,13 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Injeção de dependências criadas por nós
-        builder.Services.AddScoped(ConfigurarContextoDados);
+        builder.Services.AddScoped((_) => new ContextoDados(true));
         builder.Services.AddScoped<RepositorioMedicamentoEmArquivo>();
-        builder.Services.AddScoped<RepositorioFuncionarioEmArquivo>();          
+        builder.Services.AddScoped<RepositorioFuncionarioEmArquivo>();
         builder.Services.AddScoped<RepositorioFornecedorEmArquivo>();
-        builder.Services.AddScoped<RepositorioPacienteEmArquivo>(); 
-        
-        
+        builder.Services.AddScoped<RepositorioPacienteEmArquivo>();
+
+
         // Injeção de dependências da Microsoft.
         builder.Services.AddControllersWithViews();
 
@@ -37,10 +37,5 @@ public class Program
             pattern: "{controller=Home}/{action=Index}/{id?}");
 
         app.Run();
-    }
-
-    private static ContextoDados ConfigurarContextoDados(IServiceProvider serviceProvider)
-    {
-        return new ContextoDados(true);
     }
 }
