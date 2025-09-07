@@ -25,6 +25,8 @@ public class Program
 
         var caminhoArquivoLog = Path.Combine(caminhoAppData, "ControleDeMedicamentos", "erro.log");
 
+        var licenseKey = builder.Configuration["NEWRELIC_LICENSE_KEY"];
+
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
             .WriteTo.Console()
@@ -32,7 +34,7 @@ public class Program
             .WriteTo.NewRelicLogs(
             endpointUrl: "https://log-api.newrelic.com/log/v1",
             applicationName: "ControleDeMedicamentos",
-            licenseKey: "6811da072f1d329757af2b2954bf5a74FFFFNRAL"
+            licenseKey: licenseKey
             )
             .CreateLogger();
 
