@@ -3,6 +3,7 @@ using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloFornecedor;
 using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloFuncionario;
 using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloMedicamento;
 using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloPaciente;
+using ControleDeMedicamentos.WebApp.DependencyInjection;
 using Serilog;
 using Serilog.Events;
 
@@ -21,30 +22,7 @@ public class Program
         builder.Services.AddScoped<RepositorioFornecedorEmArquivo>();
         builder.Services.AddScoped<RepositorioPacienteEmArquivo>();
 
-        var caminhoAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-
-        var caminhoArquivoLog = Path.Combine(caminhoAppData, "ControleDeMedicamentos", "erro.log");
-
-        var licenseKey = builder.Configuration["NEWRELIC_LICENSE_KEY"];
-
-        Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Debug()
-            .WriteTo.Console()
-            .WriteTo.File(caminhoArquivoLog, LogEventLevel.Error)
-            .WriteTo.NewRelicLogs(
-            endpointUrl: "https://log-api.newrelic.com/log/v1",
-            applicationName: "ControleDeMedicamentos",
-            licenseKey: licenseKey
-            )
-            .CreateLogger();
-
-        //builder.Logging.ClearProviders();
-
-        builder.Services.AddLogging();
-
-
-        // Injeção de dependências da Microsoft.
-        builder.Services.AddControllersWithViews();
+        SerilogConfig.AddSerilogConfig(builder.Services,builder.Logging,builder.Configuration);
 
         var app = builder.Build();
 
@@ -61,4 +39,6 @@ public class Program
 
         app.Run();
     }
+
+    
 }
