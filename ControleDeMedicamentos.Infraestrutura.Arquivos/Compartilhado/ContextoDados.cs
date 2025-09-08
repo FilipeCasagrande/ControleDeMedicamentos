@@ -2,6 +2,8 @@
 using ControleDeMedicamentos.Dominio.ModuloFornecedor;
 using ControleDeMedicamentos.Dominio.ModuloFuncionario;
 using ControleDeMedicamentos.Dominio.ModuloMedicamento;
+using ControleDeMedicamentos.Dominio.ModuloPrescricao;
+using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloPrescricao;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -13,6 +15,7 @@ public class ContextoDados
     public List<Fornecedor> Fornecedores { get; set; } = new List<Fornecedor>();
     public List<Paciente> Pacientes { get; set; } = new List<Paciente>();
     public List<Medicamento> Medicamentos { get;  set; } = new List<Medicamento>();
+    public List<Prescricao> Prescricoes { get; set; } = new List<Prescricao>();
 
     private string pastaArmazenamento = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
