@@ -16,13 +16,11 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Injeção de dependências criadas por nós
-        builder.Services.AddScoped((_) => new ContextoDados(true));
-        builder.Services.AddScoped<RepositorioMedicamentoEmArquivo>();
-        builder.Services.AddScoped<RepositorioFuncionarioEmArquivo>();
-        builder.Services.AddScoped<RepositorioFornecedorEmArquivo>();
-        builder.Services.AddScoped<RepositorioPacienteEmArquivo>();
+        builder.Services.AddCamadaInfraestrutura();
 
-        SerilogConfig.AddSerilogConfig(builder.Services,builder.Logging,builder.Configuration);
+        builder.Services.AddSerilogConfig(builder.Logging, builder.Configuration);
+
+        builder.Services.AddControllersWithViews();
 
         var app = builder.Build();
 
@@ -40,5 +38,4 @@ public class Program
         app.Run();
     }
 
-    
 }
