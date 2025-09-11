@@ -68,6 +68,8 @@ public class FuncionarioController : Controller
     [HttpPost]
     public IActionResult Editar(EditarFuncionarioViewModel editarVm)
     {
+
+
         if (!ModelState.IsValid)
             return View(editarVm);
 

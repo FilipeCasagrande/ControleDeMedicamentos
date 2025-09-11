@@ -19,6 +19,7 @@ namespace ControleDeMedicamentos.Dominio.ModucloPaciente
 
         public Paciente(string nome, string telefone, string cartao, string cpf)
         {
+            Id = Guid.NewGuid();
             Nome = nome;
             Telefone = telefone;
             Cartao = cartao;

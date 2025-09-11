@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 
 namespace ControleDeMedicamentos.Dominio.ModuloPrescricao;
 
+
+
+
+
 public class Prescricao : EntidadeBase<Prescricao>
 {
     public string Descricao { get; set; }

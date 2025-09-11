@@ -46,7 +46,7 @@ public class PacienteController : Controller
         var registro = repositorioPaciente.SelecionarRegistroPorId(id);
 
         var editarVm = new EditarPacienteViewModel(
-            id,
+            registro.Id,
             registro.Nome,
             registro.Telefone,
             registro.Cpf,
@@ -73,17 +73,22 @@ public class PacienteController : Controller
     public IActionResult Excluir(Guid id)
     {
         var registro = repositorioPaciente.SelecionarRegistroPorId(id);
-        var excluirVm = new ExcluirPacienteViewModel(registro.Id, registro.Nome);
+
+        
+        var excluirVm = new ExcluirPacienteViewModel(
+            registro.Id,
+            registro.Nome
+            );
         return View(excluirVm);
     }
     [HttpPost]
     public IActionResult Excluir(ExcluirPacienteViewModel excluirVm)
     {
         repositorioPaciente.ExcluirRegistro(excluirVm.Id);
-        
+
         return RedirectToAction(nameof(Index));
 
 
     }
-        
+
 }

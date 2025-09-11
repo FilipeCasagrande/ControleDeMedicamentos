@@ -1,4 +1,5 @@
-﻿using ControleDeMedicamentos.Dominio.ModuloFornecedor;
+﻿using ControleDeMedicamentos.Dominio.ModucloPaciente;
+using ControleDeMedicamentos.Dominio.ModuloFornecedor;
 using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloFornecedor;
 using ControleDeMedicamentos.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -54,6 +55,9 @@ public class FornecedorController : Controller
     public IActionResult Editar(Guid id)
     {
         var registro = repositorioFornecedor.SelecionarRegistroPorId(id);
+
+        if (registro == null)
+            return RedirectToAction(nameof(Index));
 
         var editarVm = new EditarFornecedorViewModel(
             registro.Id,

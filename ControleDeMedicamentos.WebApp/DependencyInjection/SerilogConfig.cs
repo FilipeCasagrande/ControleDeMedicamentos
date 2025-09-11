@@ -26,7 +26,6 @@ namespace ControleDeMedicamentos.WebApp.DependencyInjection
 
             logging.ClearProviders();
 
-            // Injeção de dependências da Microsoft.
             services.AddSerilog();
         }
     }
