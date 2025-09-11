@@ -1,5 +1,6 @@
 ﻿using ControleDeMedicamentos.Dominio.Compartilhado;
 using ControleDeMedicamentos.Dominio.ModuloFornecedor;
+using ControleDeMedicamentos.Dominio.ModuloRequisicaoMedicamento;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,30 @@ public class Medicamento : EntidadeBase<Medicamento>
     public string Nome { get; set; }
     public string Descricao { get; set; }
     public Fornecedor Fornecedor { get; set; }
-    public int Quantidade { get; set; }
+    public List<RequisicaoEntrada> RequisicoesEntrada { get; set; } = new List<RequisicaoEntrada>();
+    public List<RequisicaoSaida> RequisicoesSaida { get; set; } = new List<RequisicaoSaida>();
+    public int QuantidadeEmEstoque
+    {
+        get
+        {
+            int quantidadeEmEstoque = 0;
+
+            foreach (var req in RequisicoesEntrada)
+                quantidadeEmEstoque += req.QuantidadeRequisitada;
+
+            foreach (var req in RequisicoesSaida)
+            {
+                foreach (var med in req.Prescricao.MedicamentosPrescritos)
+                    quantidadeEmEstoque -= med.Quantidade;
+            }
+
+            return quantidadeEmEstoque;
+        }
+    }
 
     public bool EmFalta
     {
-               get { return Quantidade < 20; }
+        get { return QuantidadeEmEstoque < 20; }
     }
 
     public Medicamento() { }
