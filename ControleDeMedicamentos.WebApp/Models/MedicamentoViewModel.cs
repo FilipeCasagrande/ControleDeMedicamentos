@@ -95,7 +95,7 @@ public class VisualizarMedicamentoViewModel
                 m.Nome,
                 m.Descricao,
                 m.Fornecedor.Nome,
-                m.Quantidade,
+                m.QuantidadeEmEstoque,
                 m.EmFalta
             );
             Registros.Add(detalhesVm);
